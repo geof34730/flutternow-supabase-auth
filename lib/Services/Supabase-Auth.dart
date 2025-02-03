@@ -1,8 +1,11 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseAuthService {
+  final supabase = Supabase.instance.client;
+
+
   Future<void> signUpUser( {required String email, required String password, required String lastName, required String firstName}) async {
-    final response = await Supabase.instance.client.auth.signUp(
+    final response = await supabase.auth.signUp(
       email: email,
       password: password,
       data: {
@@ -16,7 +19,7 @@ class SupabaseAuthService {
   }
 
   Future<void> signInUser({required String email, required String password}) async {
-    final response = await Supabase.instance.client.auth.signInWithPassword(
+    final response = await supabase.auth.signInWithPassword(
       email: email,
       password: password,
     );
@@ -26,6 +29,13 @@ class SupabaseAuthService {
   }
 
   Future<void> signOutUser() async {
-    await Supabase.instance.client.auth.signOut();
+    await supabase.auth.signOut();
   }
+
+  bool isLogged() {
+    final user = supabase.auth.currentUser;
+    return (user != null);
+  }
+
+
 }

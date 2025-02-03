@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_auth/Ui/Widgets/AuthRegister.dart';
-import 'package:supabase_auth/Ui/Widgets/AuthSignIn.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'Ui/Widgets/AuthProfile.dart';
+import 'package:supabase_auth/Services/Supabase-Auth.dart';
+import 'package:supabase_auth/Ui/Widgets/AuthRegister.dart';
+import 'package:supabase_auth/Ui/Widgets/AuthSignIn.dart';
+import 'package:supabase_auth/Ui/Widgets/AuthProfile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,14 +13,14 @@ void main() async {
     url: dotenv.env['SUPABASE_URL'] ?? '',
     anonKey: dotenv.env['SUPABASE_ANON_KEY'] ?? '',
   );
-   runApp(MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(title: "FlutterNow - Test Supabase",),
+      home: HomePage(title: "FlutterNow - Test Supabase"),
     );
   }
 }
@@ -39,15 +40,23 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body:
-        GridView.count(
-        crossAxisCount: 3,
-          children: [
-            AuthRegister(),
-            AuthSignIn(),
-            AuthProfile(),
-          ],
-        ),
+      body: StreamBuilder<AuthState>(
+        stream: Supabase.instance.client.auth.onAuthStateChange,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+           return GridView.count(
+              crossAxisCount:SupabaseAuthService().isLogged() ? 1 : 2,
+              children: [
+                SupabaseAuthService().isLogged() ? AuthProfile() :  AuthRegister(),AuthSignIn(),
+              ],
+            );
+        }
+      ),
     );
   }
 }
+

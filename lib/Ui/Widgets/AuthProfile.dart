@@ -5,7 +5,9 @@ import '../../Services/Supabase-Auth.dart';
 
 
 Container AuthProfile() {
-  final user = Supabase.instance.client.auth.currentUser;
+  final supabaseClient=Supabase.instance.client;
+
+  final user = supabaseClient.auth.currentUser;
   final userMetadata = user?.userMetadata ?? {};
   return Container(
       color: Colors.blue,
@@ -26,7 +28,7 @@ Container AuthProfile() {
               Padding(
                   padding: EdgeInsets.all(5),
                   child:Text(
-                    'Your email : ${Supabase.instance.client.auth.currentUser?.email}',
+                    'Your email : ${supabaseClient.auth.currentUser?.email}',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -66,7 +68,7 @@ Container AuthProfile() {
               Padding(
                   padding: EdgeInsets.all(10),
                   child:Text(
-                    'created_at : ${Supabase.instance.client.auth.currentUser?.createdAt}',
+                    'created_at : ${supabaseClient.auth.currentUser?.createdAt}',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -76,7 +78,7 @@ Container AuthProfile() {
               Padding(
                   padding: EdgeInsets.all(10),
                   child:Text(
-                    'email_ConfirmedAt : ${Supabase.instance.client.auth.currentUser?.emailConfirmedAt}',
+                    'email_ConfirmedAt : ${supabaseClient.auth.currentUser?.emailConfirmedAt}',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
