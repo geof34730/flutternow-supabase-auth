@@ -24,18 +24,18 @@ Ce projet est une application Flutter qui utilise Supabase pour gérer l'authent
 
 3. **Configurer Supabase :**
 
-    - Créez un projet sur [Supabase](https://supabase.io/).
-    - Obtenez votre `url` et `anonKey` de votre projet Supabase.
+   - Créez un projet sur [Supabase](https://supabase.io/).
+   - Obtenez votre `url` et `anonKey` de votre projet Supabase.
 
 4. **Configurer le fichier `.env` :**
 
-    - Dupliquez le fichier `sample.env` et renommez-le en `.env`.
-    - Ouvrez le fichier `.env` et remplacez les valeurs par vos propres informations Supabase :
+   - Dupliquez le fichier `sample.env` et renommez-le en `.env`.
+   - Ouvrez le fichier `.env` et remplacez les valeurs par vos propres informations Supabase :
 
-      ```plaintext
-      SUPABASE_URL=your-supabase-url
-      SUPABASE_ANON_KEY=your-supabase-anon-key
-      ```
+     ```plaintext
+     SUPABASE_URL=your-supabase-url
+     SUPABASE_ANON_KEY=your-supabase-anon-key
+     ```
 
    **Note :** Ne partagez pas votre fichier `.env` et assurez-vous qu'il est listé dans votre `.gitignore`.
 

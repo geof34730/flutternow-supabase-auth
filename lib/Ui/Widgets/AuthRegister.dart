@@ -5,6 +5,11 @@ import '../../Services/Supabase-Auth.dart';
 
 Container AuthRegister() {
   final _formKeyAuth = GlobalKey<FormState>();
+
+  TextEditingController lastNameController = new TextEditingController();
+  TextEditingController firstNameController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
   return Container(
     padding: EdgeInsets.all(10),
     alignment: Alignment.topLeft,
@@ -25,6 +30,7 @@ Container AuthRegister() {
           Padding(
             padding: EdgeInsets.all(10),
             child:TextFormField(
+              controller: lastNameController,
               decoration: const InputDecoration(
                 fillColor: Color(0xFFE0E0E0),
                 filled: true,
@@ -39,6 +45,7 @@ Container AuthRegister() {
           Padding(
               padding: EdgeInsets.all(10),
               child:TextFormField(
+                controller: firstNameController,
                 decoration: const InputDecoration(
                   fillColor: Color(0xFFE0E0E0),
                   filled: true,
@@ -54,6 +61,7 @@ Container AuthRegister() {
               padding: EdgeInsets.all(10),
               child:
               TextFormField(
+                controller: emailController,
                 decoration: const InputDecoration(
                   fillColor: Color(0xFFE0E0E0),
                   filled: true,
@@ -68,6 +76,7 @@ Container AuthRegister() {
           Padding(
               padding: EdgeInsets.all(10),
               child:TextFormField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   fillColor: Color(0xFFE0E0E0),
@@ -86,10 +95,10 @@ Container AuthRegister() {
                 onPressed: () {
                   if (_formKeyAuth.currentState!.validate()) {
                     SupabaseAuthService().signUpUser(
-                      email: "geoffrey.petain@gmail.com",
-                      password: "testgdgdghsk",
-                      lastName: "Pétain",
-                      firstName: "Geoffrey",
+                      email: emailController.text,
+                      password: passwordController.text,
+                      lastName: lastNameController.text,
+                      firstName: firstNameController.text,
                     );
                   }
                 },
