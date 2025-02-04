@@ -34,7 +34,7 @@ Container AuthSignIn() {
                       labelText: 'Email *',
                     ),
                     validator: (String? value) {
-                      return (value == null && value=="" ) ? 'add password' : null;
+                      return (value == null || value=="" ) ? 'add email' : null;
                     },
                   )
               ),
@@ -50,7 +50,7 @@ Container AuthSignIn() {
                     labelText: 'Password *',
                   ),
                   validator: (String? value) {
-                    return (value == null && value=="" ) ? 'add password' : null;
+                    return (value == null || value=="" ) ? 'add password' : null;
                   },
                 ),
               ),
@@ -65,7 +65,7 @@ Container AuthSignIn() {
                         );
                       }
                     },
-                    child: const Text('Save'),
+                    child: const Text('Login'),
                   )
               ),
             ],

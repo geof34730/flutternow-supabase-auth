@@ -38,7 +38,7 @@ Container AuthRegister() {
                 labelText: 'Lastname *',
               ),
               validator: (String? value) {
-                return (value == null && value=="" ) ? 'add password' : null;
+                return (value == null || value=="" ) ? 'add lastname' : null;
               },
             ),
           ),
@@ -53,7 +53,7 @@ Container AuthRegister() {
                   labelText: 'Firstname *',
                 ),
                 validator: (String? value) {
-                  return (value == null && value=="" ) ? 'add password' : null;
+                  return (value == null || value=="" ) ? 'add firstname' : null;
                 },
               )
           ),
@@ -69,7 +69,7 @@ Container AuthRegister() {
                   labelText: 'Email *',
                 ),
                 validator: (String? value) {
-                  return (value == null && value=="" ) ? 'add password' : null;
+                  return (value == null || value=="" ) ? 'add email' : null;
                 },
               )
           ),
@@ -85,7 +85,7 @@ Container AuthRegister() {
                   labelText: 'Password *',
                 ),
                 validator: (String? value) {
-                  return (value == null && value=="" ) ? 'add password' : null;
+                  return (value == null || value=="" ) ? 'add password' : null;
                 },
               )
           ),
